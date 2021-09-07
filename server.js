@@ -16,32 +16,23 @@ server.get("/", (req, res) => {
 //http://localhost:3456/weather
 server.get("/weather", (req, res) => {
   let name = req.query.name;
+  let weatherArr = [];
   let weather = data.find((item) => {
     if (name === item.city_name) {
-      return item.city_name;
+      weatherArr = item.data.map((day) => {
+        let newObj = new Forecast(day);
+        return newObj;
+      });
     }
   });
-  let arr = [
-    {
-      city: weather.city_name,
-      lat: weather.lat,
-      lon: weather.lon,
-      day1: {
-        weather: weather.data[0].weather.description,
-        time: weather.data[0].datetime,
-      },
-      day2: {
-        weather: weather.data[1].weather.description,
-        time: weather.data[1].datetime,
-      },
-      day3: {
-        weather: weather.data[2].weather.description,
-        time: weather.data[2].datetime,
-      },
-    },
-  ];
-  res.send(arr);
+
+  res.send(weatherArr);
 });
+
+function Forecast(day) {
+  (this.date = day.valid_date),
+    (this.desc = `Low of ${day.low_temp}, high of ${day.high_temp} with ${day.weather.description}`);
+}
 
 server.get("*", (req, res) => {
   res.status(500).send("Page Not Found");
