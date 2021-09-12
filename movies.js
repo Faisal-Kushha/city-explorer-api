@@ -1,4 +1,5 @@
 const axios = require("axios");
+const Load = require("./Load");
 
 function getMovies(req, res) {
   let name = req.query.name;
@@ -14,13 +15,5 @@ function getMovies(req, res) {
     .catch((err) => {
       console.log(err);
     });
-  function Load(day) {
-    (this.title = day.original_title),
-      (this.overview = day.overview),
-      (this.average_votes = day.vote_average),
-      (this.total_votes = day.vote_count),
-      (this.popularity = day.popularity),
-      (this.released_on = day.release_date);
-  }
 }
 module.exports = getMovies;
