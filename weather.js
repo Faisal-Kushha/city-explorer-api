@@ -3,7 +3,7 @@ const Forecast = require("./Forecast");
 
 function getWeather(req, res) {
   let name = req.query.name;
-  let URL = `https://api.weatherbit.io/v2.0/forecast/daily?city=${name}&key=${process.env.WEATHER_API_KEY}`;
+  let URL = `https://api.weatherbit.io/v2.0/forecast/daily?city=Amman&key=${process.env.WEATHER_API_KEY}`;
   axios
     .get(URL)
     .then((arr) => {
